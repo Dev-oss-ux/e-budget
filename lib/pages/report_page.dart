@@ -10,7 +10,7 @@ class ReportPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Détails des Dépenses'),
+        title: Text('Rapport financier'),
         backgroundColor: Colors.teal[400],
       ),
       body: Padding(
@@ -19,7 +19,51 @@ class ReportPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Catégorie',
+              'Évolution des dépenses',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: LineChart(
+                LineChartData(
+                  gridData: FlGridData(show: false),
+                  titlesData: FlTitlesData(show: false),
+                  borderData: FlBorderData(
+                    show: true,
+                    border: Border.all(color: const Color(0xff37434d), width: 1),
+                  ),
+                  minX: 0,
+                  maxX: 6,
+                  minY: 0,
+                  maxY: 6,
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: [
+                        FlSpot(0, 3),
+                        FlSpot(1, 1),
+                        FlSpot(2, 4),
+                        FlSpot(3, 2),
+                        FlSpot(4, 5),
+                        FlSpot(5, 1),
+                        FlSpot(6, 4),
+                      ],
+                      isCurved: true,
+                      color: Colors.teal,
+                      barWidth: 3,
+                      isStrokeCapRound: true,
+                      dotData: FlDotData(show: false),
+                      belowBarData: BarAreaData(
+                        show: true,
+                        color: Colors.teal.withOpacity(0.3),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Détails des dépenses par catégorie',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
@@ -30,37 +74,6 @@ class ReportPage extends StatelessWidget {
                   titlesData: _buildTitles(budgetProvider),
                   borderData: FlBorderData(show: false),
                   gridData: FlGridData(show: false),
-                  alignment: BarChartAlignment.spaceAround,
-                  maxY: budgetProvider.categories
-                      .map((c) => c.amount)
-                      .reduce((a, b) => a > b ? a : b) +
-                      50, // maxY avec une petite marge
-                  barTouchData: BarTouchData(
-                    enabled: true,
-                    touchTooltipData: BarTouchTooltipData(
-                      tooltipPadding: EdgeInsets.all(8),
-                      tooltipMargin: 4,
-                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                        final category = budgetProvider.categories[groupIndex];
-                        return BarTooltipItem(
-                          '${category.name}\n',
-                          TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: '${rod.toY.toInt()}€',
-                              style: TextStyle(
-                                color: Colors.tealAccent[100],
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
                 ),
               ),
             ),
