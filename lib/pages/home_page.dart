@@ -245,12 +245,48 @@ class _HomePageState extends State<HomePage> {
               );
             },
           ),
+          // Nouveaux boutons
+          ListTile(
+            leading: Icon(Icons.flag), // Changé de Icons.target à Icons.flag
+            title: Text('Objectifs budgétaires'),
+            onTap: () {
+              // Ajouter la navigation vers la page des objectifs budgétaires
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.category),
+            title: Text('Catégories de dépenses'),
+            onTap: () {
+              // Ajouter la navigation vers la page des catégories de dépenses
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.timeline),
+            title: Text('Planification financière'),
+            onTap: () {
+              // Ajouter la navigation vers la page de planification financière
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Paramètres'),
+            onTap: () {
+              // Ajouter la navigation vers la page des paramètres
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.help),
+            title: Text('Aide et support'),
+            onTap: () {
+              // Ajouter la navigation vers la page d'aide et support
+            },
+          ),
           Divider(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Déconnexion'),
             onTap: () {
-              // Ajoutez ici la logique de déconnexion
+              // Logique de déconnexion
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => AuthPage()),
