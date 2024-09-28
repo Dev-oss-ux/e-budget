@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application/pages/home_page.dart';
+import 'package:flutter_application/pages/auth_page.dart';
 import 'package:flutter_application/providers/budget_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Gestion de Budget',
         theme: ThemeData(
-          primarySwatch: Colors.green,
+          primarySwatch: Colors.teal,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: HomePage(),
+        home: AuthPage(),
       ),
     );
   }
