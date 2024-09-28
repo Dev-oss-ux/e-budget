@@ -7,6 +7,11 @@ import 'package:flutter_application/pages/report_page.dart';
 import 'package:flutter_application/pages/transactions_page.dart';
 import 'package:flutter_application/pages/auth_page.dart';
 import 'package:flutter_application/widgets/transaction_list.dart';  // Assurez-vous que ce fichier est correct
+import 'package:flutter_application/pages/BudgetGoalsPage.dart';
+import 'package:flutter_application/pages/ExpenseCategoriesPage.dart';
+import 'package:flutter_application/pages/FinancialPlanningPage.dart';
+import 'package:flutter_application/pages/SettingsPage.dart';
+import 'package:flutter_application/pages/HelpSupportPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -250,35 +255,50 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.flag), // Changé de Icons.target à Icons.flag
             title: Text('Objectifs budgétaires'),
             onTap: () {
-              // Ajouter la navigation vers la page des objectifs budgétaires
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BudgetGoalsPage()),
+              );
             },
           ),
           ListTile(
             leading: Icon(Icons.category),
             title: Text('Catégories de dépenses'),
             onTap: () {
-              // Ajouter la navigation vers la page des catégories de dépenses
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ExpenseCategoriesPage()),
+              );
             },
           ),
           ListTile(
             leading: Icon(Icons.timeline),
             title: Text('Planification financière'),
             onTap: () {
-              // Ajouter la navigation vers la page de planification financière
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FinancialPlanningPage()),
+              );
             },
           ),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Paramètres'),
             onTap: () {
-              // Ajouter la navigation vers la page des paramètres
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+              );
             },
           ),
           ListTile(
             leading: Icon(Icons.help),
             title: Text('Aide et support'),
             onTap: () {
-              // Ajouter la navigation vers la page d'aide et support
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HelpSupportPage()),
+              );
             },
           ),
           Divider(),
