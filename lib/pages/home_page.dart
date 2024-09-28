@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_application/providers/budget_provider.dart';
 import 'package:flutter_application/pages/add_transaction_page.dart';
 import 'package:flutter_application/pages/report_page.dart';
+import 'package:flutter_application/pages/transactions_page.dart';
+import 'package:flutter_application/pages/auth_page.dart';
 import 'package:flutter_application/widgets/transaction_list.dart';  // Assurez-vous que ce fichier est correct
 
 class HomePage extends StatefulWidget {
@@ -46,6 +48,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.teal[400],
         elevation: 0,
       ),
+      drawer: _buildDrawer(context),
       body: Container(
         color: Colors.grey[100],
         child: Column(
@@ -63,26 +66,15 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Transactions',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pie_chart),
-            label: 'Rapports',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Ajouter',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.teal[400],
-        onTap: _onItemTapped,
-        backgroundColor: Colors.white,
-        elevation: 10,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddTransactionPage()),
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.teal[400],
       ),
     );
   }
@@ -204,6 +196,69 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       child: Icon(icon, size: 18, color: Colors.teal[400]),
+    );
+  }
+
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.teal[400],
+            ),
+            child: Text(
+              'Menu',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Accueil'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.list),
+            title: Text('Transactions'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TransactionsPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.pie_chart),
+            title: Text('Rapports'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ReportPage()),
+              );
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Déconnexion'),
+            onTap: () {
+              // Ajoutez ici la logique de déconnexion
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => AuthPage()),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
