@@ -206,115 +206,78 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.teal[400],
-            ),
-            child: Text(
-              'Menu',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
+      child: Container(
+        color: Colors.teal[50],
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.teal[400]!, Colors.teal[200]!],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.person, color: Colors.teal[400], size: 30),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Nom d\'utilisateur',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  Text(
+                    'utilisateur@email.com',
+                    style: TextStyle(color: Colors.white70, fontSize: 14),
+                  ),
+                ],
               ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Accueil'),
-            onTap: () {
+            _buildDrawerItem(Icons.home, 'Accueil', () => Navigator.pop(context)),
+            _buildDrawerItem(Icons.list, 'Transactions', () {
               Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.list),
-            title: Text('Transactions'),
-            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TransactionsPage()));
+            }),
+            _buildDrawerItem(Icons.pie_chart, 'Rapports', () {
               Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TransactionsPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.pie_chart),
-            title: Text('Rapports'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ReportPage()),
-              );
-            },
-          ),
-          // Nouveaux boutons
-          ListTile(
-            leading: Icon(Icons.flag), // Changé de Icons.target à Icons.flag
-            title: Text('Objectifs budgétaires'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => BudgetGoalsPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.category),
-            title: Text('Catégories de dépenses'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ExpenseCategoriesPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.timeline),
-            title: Text('Planification financière'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FinancialPlanningPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Paramètres'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.help),
-            title: Text('Aide et support'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HelpSupportPage()),
-              );
-            },
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Déconnexion'),
-            onTap: () {
-              // Logique de déconnexion
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => AuthPage()),
-              );
-            },
-          ),
-        ],
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ReportPage()));
+            }),
+            _buildDrawerItem(Icons.flag, 'Objectifs budgétaires', () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => BudgetGoalsPage()));
+            }),
+            _buildDrawerItem(Icons.category, 'Catégories de dépenses', () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ExpenseCategoriesPage()));
+            }),
+            _buildDrawerItem(Icons.timeline, 'Planification financière', () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FinancialPlanningPage()));
+            }),
+            _buildDrawerItem(Icons.settings, 'Paramètres', () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
+            }),
+            _buildDrawerItem(Icons.help, 'Aide et support', () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HelpSupportPage()));
+            }),
+            Divider(color: Colors.teal[200]),
+            _buildDrawerItem(Icons.exit_to_app, 'Déconnexion', () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AuthPage()));
+            }),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.teal[400]),
+      title: Text(title, style: TextStyle(color: Colors.teal[800])),
+      onTap: onTap,
     );
   }
 }
